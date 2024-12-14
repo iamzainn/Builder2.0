@@ -3,6 +3,8 @@ import { useEditorStore } from '@/lib/store/editor-store';
 import { useHistoryStore } from '@/lib/store/history-store';
 import { Button } from '@/components/ui/button';
 import { Eye, EyeOff, Undo2, Redo2, Save } from 'lucide-react';
+import { DevicePreview } from './Editor-toolbar';
+
 
 export default function EditorHeader() {
   const theme = useThemeStore(state => state.getActiveTheme());
@@ -16,6 +18,12 @@ export default function EditorHeader() {
           {theme?.name || 'Theme Editor'}
         </h1>
       </div>
+
+      {/* Center - Add Device Preview */}
+      <div className="flex items-center gap-4">
+        <DevicePreview />
+      </div>
+
 
       <div className="flex items-center space-x-2">
         <Button

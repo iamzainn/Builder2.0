@@ -1,3 +1,5 @@
+//src/components/editor/EditorCanvas.tsx
+
 import { useThemeStore } from '@/lib/store/theme-store';
 import { useEditorStore } from '@/lib/store/editor-store';
 import { useHistoryStore } from '@/lib/store/history-store';
@@ -20,6 +22,7 @@ import {
 import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { ThemeSection } from '@/lib/types/theme';
+import { PreviewFrame } from './preview-frame';
 
 export default function EditorCanvas() {
   const theme = useThemeStore(state => state.getActiveTheme());
@@ -81,6 +84,9 @@ export default function EditorCanvas() {
 
   return (
     <div className="h-full overflow-auto">
+      <PreviewFrame>
+
+     
       <div 
         className={cn(
           "min-h-full w-full max-w-screen-xl mx-auto bg-white shadow-sm transition-opacity",
@@ -88,10 +94,10 @@ export default function EditorCanvas() {
         )}
       >
         <DndContext
-          sensors={sensors}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-        >
+            sensors={sensors}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+          >
           <SortableContext
             items={theme.sections.map(section => section.id)}
             strategy={verticalListSortingStrategy}
@@ -114,6 +120,7 @@ export default function EditorCanvas() {
           <DragOverlay activeSection={activeSection} />
         </DndContext>
       </div>
+      </PreviewFrame>
     </div>
   );
 }

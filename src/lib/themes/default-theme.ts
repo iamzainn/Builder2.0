@@ -21,9 +21,9 @@ const defaultSections: ThemeSection[] = [
         color: '#111827'
       },
       navigation: [
-        { label: 'Home', link: '#' },
-        { label: 'Shop', link: '#' },
-        { label: 'About', link: '#' }
+        { label: 'Home', link: '/' },
+        { label: 'Shop', link: '/shopping' },
+        { label: 'About', link: '/about' }
       ]
     }
   },
@@ -120,6 +120,8 @@ export const defaultTheme: Theme = {
   id: THEME_ID,
   name: 'Default Store Theme',
   version: '1.0.0',
-  settings: {},
+  settings: {
+    
+  },
   sections: defaultSections
 };

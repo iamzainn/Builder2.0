@@ -7,10 +7,13 @@ import { ThemeSection } from '@/lib/types/theme';
 import { Section } from './Section';
 import { GripVertical } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useEditorStore } from '@/lib/store/editor-store';
+import { DeviceType } from '@/lib/types/editor';
 
 interface DraggableSectionProps {
   section: ThemeSection;
   isPreview: boolean;
+  
 }
 
 export function DraggableSection({ section, isPreview }: DraggableSectionProps) {
@@ -22,6 +25,7 @@ export function DraggableSection({ section, isPreview }: DraggableSectionProps) 
     transition,
     isDragging,
   } = useSortable({ id: section.id });
+  const devicePreview = useEditorStore((state) => state.devicePreview);
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -35,7 +39,10 @@ export function DraggableSection({ section, isPreview }: DraggableSectionProps) 
       className={cn(
         'relative group',
         isDragging && 'z-50',
-        !isPreview && 'hover:outline hover:outline-2 hover:outline-blue-500'
+        !isPreview && 'hover:outline hover:outline-2 hover:outline-blue-500',
+        // Add responsive classes based on device
+        devicePreview === 'mobile' && 'mobile-view',
+        devicePreview === 'tablet' && 'tablet-view'
       )}
     >
       {!isPreview && (
@@ -50,7 +57,11 @@ export function DraggableSection({ section, isPreview }: DraggableSectionProps) 
           <GripVertical className="h-4 w-4 text-gray-400" />
         </button>
       )}
-      <Section section={section} isPreview={isPreview} />
+      <Section 
+        section={section} 
+        isPreview={isPreview}
+        // devicePreview={devicePreview}
+      />
     </div>
   );
 }

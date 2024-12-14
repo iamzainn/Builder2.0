@@ -4,6 +4,8 @@ import { Theme } from "./theme";
 
 export type EditorMode = 'edit' | 'preview';
 
+export type DeviceType = 'mobile' | 'tablet' | 'desktop';
+
 export type SelectedElement = {
   sectionId: string;
   blockId?: string;
